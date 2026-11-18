@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Well Soon! 🌸 Sending You Warmth & Hugs</title>
+  <meta name="description" content="A special virtual care package filled with love, warm tea, cozy hugs, and healing vibes." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Ambient floating particles canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Sound Toggle & Customize Buttons -->
+  <div class="top-controls">
+    <button id="sound-btn" class="icon-pill-btn" aria-label="Toggle soothing ambient music" title="Toggle Calming Music">
+      <span class="icon" id="sound-icon">🎵</span>
+      <span class="btn-text">Soothing Chimes</span>
+    </button>
+    <button id="customize-btn" class="icon-pill-btn" aria-label="Customize message" title="Customize this card">
+      <span class="icon">✏️</span>
+      <span class="btn-text">Personalize</span>
+    </button>
+  </div>
+
+  <!-- Stage 1: The Sealed Care Package / Envelope -->
+  <main id="package-stage" class="stage-active">
+    <div class="package-container">
+      <div class="floating-badge">Special Delivery 💌</div>
+      
+      <div class="envelope-wrapper" id="envelope-wrapper" role="button" tabindex="0" aria-label="Click to open your care package">
+        <div class="envelope">
+          <div class="envelope-flap"></div>
+          <div class="envelope-pocket"></div>
+          <div class="envelope-letter-peek">
+            <span class="peek-heart">💛</span>
+            <span class="peek-text">Get Well Soon</span>
+          </div>
+          <div class="wax-seal" id="wax-seal">
+            <div class="seal-inner">🌸</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="package-hint">
+        <h2 id="recipient-preview-title">A care package for <span class="highlight-name name-target">Friend</span></h2>
+        <p class="pulse-text">Tap the envelope to open with love ✨</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Stage 2: The Main Interactive Experience -->
+  <main id="letter-stage" class="stage-hidden">
+    <div class="content-wrapper">
+      
+      <!-- Top Hero / Letter Section -->
+      <header class="care-letter-card">
+        <div class="stamp-badge">
+          <span>Priority Care</span>
+          <small>100% Love & Hugs</small>
+        </div>
+
+        <div class="letter-header">
+          <span class="healing-tag">✨ Sending Healing Energy ✨</span>
+          <h1 class="main-title">
+            Get Well Soon, <span class="highlight-name name-target">Bestie</span>!
+          </h1>
+          <p class="subtitle">Take all the rest you need. The world can wait for you to recharge 🌿</p>
+        </div>
+
+        <div class="letter-body">
+          <div class="quote-mark">“</div>
+          <p id="custom-message-text" class="personal-message">
+            I was so sorry to hear you're feeling under the weather! Sending you the warmest blankets, unlimited cups of hot tea, and all the cozy energy in the universe. Remember that resting is productive too. Take it easy, hydrate lots, and get back to your radiant self soon!
+          </p>
+          <div class="letter-signoff">
+            <p class="signoff-with">With all my love & care,</p>
+            <p id="sender-target" class="sender-name">Your Friend 🌻</p>
+          </div>
+        </div>
+
+        <div class="quick-cheer-actions">
+          <button id="burst-cheer-btn" class="primary-btn glow-effect">
+            <span>✨ Send Instant Healing Burst ✨</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Interactive Care Kit Grid -->
+      <section class="care-kit-section">
+        <div class="section-title-wrap">
+          <h2 class="section-title">Your Virtual Care Station 🧸</h2>
+          <p class="section-subtitle">A few interactive little remedies crafted just to make you smile</p>
+        </div>
+
+        <div class="remedies-grid">
+          
+          <!-- Remedy 1: Steaming Cup of Herbal Tea -->
+          <article class="remedy-card" id="tea-card">
+            <div class="remedy-header">
+              <span class="remedy-badge">Therapy 01</span>
+              <h3>Brew Warm Cozy Tea</h3>
+            </div>
+            <div class="tea-visual-wrap">
+              <div class="steam-container">
+                <span class="steam s1"></span>
+                <span class="steam s2"></span>
+                <span class="steam s3"></span>
+              </div>
+              <div class="teacup" id="teacup-icon">
+                <div class="teacup-body">
+                  <div class="tea-liquid" id="tea-liquid"></div>
+                  <div class="tea-tag" id="tea-tag">Lemon & Honey 🍯</div>
+                </div>
+                <div class="teacup-handle"></div>
+                <div class="teacup-saucer"></div>
+              </div>
+            </div>
+            <p class="remedy-desc" id="tea-status-text">Click the cup to brew a fresh comforting blend!</p>
+            <button id="brew-tea-btn" class="secondary-btn">🍵 Brew a Fresh Cup</button>
+          </article>
+
+          <!-- Remedy 2: Medicine Bottle of Uplifting Notes -->
+          <article class="remedy-card" id="pill-card">
+            <div class="remedy-header">
+              <span class="remedy-badge">Prescription</span>
+              <h3>Smiles & Recovery Pills</h3>
+            </div>
+            <div class="capsule-visual-wrap">
+              <div class="capsule-bottle" id="pill-bottle">
+                <div class="bottle-cap"></div>
+                <div class="bottle-body">
+                  <div class="bottle-label">Rx: Sunshine</div>
+                  <div class="floating-pills">
+                    <span class="mini-pill p1">💊</span>
+                    <span class="mini-pill p2">✨</span>
+                    <span class="mini-pill p3">💖</span>
+                  </div>
+                </div>
+              </div>
+              <div class="capsule-note-display" id="capsule-note">
+                <p>Click "Take a Dose" for a warm reminder!</p>
+              </div>
+            </div>
+            <p class="dose-count" id="dose-counter">Dosage: Unlimited daily refills</p>
+            <button id="pop-pill-btn" class="secondary-btn">💊 Take a Dose of Joy</button>
+          </article>
+
+          <!-- Remedy 3: Digital Flower Garden -->
+          <article class="remedy-card" id="flower-card">
+            <div class="remedy-header">
+              <span class="remedy-badge">Fresh Blooms</span>
+              <h3>Grow a Healing Garden</h3>
+            </div>
+            <div class="garden-stage" id="garden-bed">
+              <!-- Flowers dynamically grow here -->
+              <div class="soil-line"></div>
+            </div>
+            <p class="remedy-desc" id="garden-note">Click below to water your flowers and watch them bloom 🌸</p>
+            <button id="water-garden-btn" class="secondary-btn">🚿 Water Flowers (+ Bloom)</button>
+          </article>
+
+          <!-- Remedy 4: Long Distance Bear Hug Meter -->
+          <article class="remedy-card" id="hug-card">
+            <div class="remedy-header">
+              <span class="remedy-badge">Physical Comfort</span>
+              <h3>Giant Warm Hug Meter</h3>
+            </div>
+            <div class="hug-zone">
+              <div class="hug-mascot" id="hug-mascot">🧸</div>
+              <div class="hug-meter-bar">
+                <div class="hug-meter-fill" id="hug-fill"></div>
+              </div>
+              <p class="hug-status" id="hug-status">Warmth: 0% — Press & Hold to Hug!</p>
+            </div>
+            <button id="hug-btn" class="secondary-btn hold-button">
+              🤗 Hold to Send Mega Hug
+            </button>
+          </article>
+
+          <!-- Remedy 5: Pop Away Bad Germs / Stress Reliever -->
+          <article class="remedy-card wide-card" id="bubble-card">
+            <div class="remedy-header">
+              <span class="remedy-badge">Fun & Distraction</span>
+              <h3>Pop Away The Icky Germs & Rest Up</h3>
+            </div>
+            <p class="remedy-desc">Tap the bubbles to pop away aches, chills, and boredom!</p>
+            <div class="bubble-game-area" id="bubble-area">
+              <!-- Bubbles spawn here -->
+            </div>
+            <div class="bubble-footer">
+              <span id="pop-counter">Germs Busted: 0 🦠</span>
+              <button id="reset-bubbles-btn" class="small-link-btn">Spawn Fresh Bubbles 🫧</button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Cozy Checklist for Recovery -->
+      <section class="checklist-section">
+        <div class="checklist-card">
+          <div class="checklist-header">
+            <h3>Doctor's Cozy Orders for Today 📋</h3>
+            <span class="tag-fun">Zero stress allowed</span>
+          </div>
+          <ul class="checklist-items">
+            <li class="check-item active">
+              <label>
+                <input type="checkbox" checked />
+                <span class="custom-check"></span>
+                <span class="text">Wrap like a warm burrito in your favorite blanket 🌯</span>
+              </label>
+            </li>
+            <li class="check-item">
+              <label>
+                <input type="checkbox" />
+                <span class="custom-check"></span>
+                <span class="text">Drink plenty of water / warm soothing fluids 💧</span>
+              </label>
+            </li>
+            <li class="check-item">
+              <label>
+                <input type="checkbox" />
+                <span class="custom-check"></span>
+                <span class="text">Binge-watch your favorite guilty pleasure comfort shows 📺</span>
+              </label>
+            </li>
+            <li class="check-item">
+              <label>
+                <input type="checkbox" />
+                <span class="custom-check"></span>
+                <span class="text">Nap without feeling guilty (your body is hard at work healing!) 💤</span>
+              </label>
+            </li>
+            <li class="check-item">
+              <label>
+                <input type="checkbox" />
+                <span class="custom-check"></span>
+                <span class="text">Remember someone is rooting for you and cares deeply 💛</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Warm Closing Footer -->
+      <footer class="footer-wrap">
+        <p>Made with all the love and warm soup vibes 🥣✨</p>
+        <p class="footer-sub">Share this link directly with your friend anytime!</p>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Personalization Modal -->
+  <div class="modal-overlay" id="custom-modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Personalize This Card ✨</h3>
+        <button id="close-modal-btn" class="close-x-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">
+          Customize the names and message below. You can save it and copy a direct link to send to your friend!
+        </p>
+
+        <div class="input-group">
+          <label for="input-recipient">Friend's Name / Nickname:</label>
+          <input type="text" id="input-recipient" placeholder="e.g. Sarah or Bestie" value="My Dear Friend" />
+        </div>
+
+        <div class="input-group">
+          <label for="input-sender">Your Name:</label>
+          <input type="text" id="input-sender" placeholder="e.g. Alex" value="Your Best Friend" />
+        </div>
+
+        <div class="input-group">
+          <label for="input-message">Custom Message:</label>
+          <textarea id="input-message" rows="4" placeholder="Write your heartfelt get well note here...">I heard you're not feeling well and wanted to send you lots of love, warm hugs, and healing thoughts! Take all the time you need to rest, sleep in, and recharge. Can't wait to see you back on your feet smiling again! 💛</textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button id="save-custom-btn" class="primary-btn">Apply Changes</button>
+          <button id="copy-link-btn" class="secondary-btn">🔗 Copy Shareable Link</button>
+        </div>
+        <p id="copy-confirm-text" class="copy-success-msg"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio elements & Canvas scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
